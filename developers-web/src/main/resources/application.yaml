@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: developers-web
+server:
+    port: 8085
+    tomcat:
+      threads:
+        max: 100
+
+

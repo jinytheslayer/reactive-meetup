@@ -1,2 +1,0 @@
-# reactive-meetup
-Reactive-project

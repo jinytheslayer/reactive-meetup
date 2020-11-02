@@ -1,0 +1,16 @@
+management:
+  security:
+    enabled: false
+
+spring:
+  application:
+    name: dev-hub
+
+hub:
+  devDboInfo: http://localhost:8084/public/v1/developers
+  devWebInfo: http://localhost:8085/public/v1/developers
+
+server:
+  tomcat:
+    threads:
+      max: 100

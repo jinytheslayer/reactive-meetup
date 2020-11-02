@@ -1,0 +1,68 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="kosyrevev" id="070092020_create_seq">
+        <createSequence sequenceName="hibernate_sequence" startValue="30001" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet author="kosyrevev" id="20200611_create_task">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="reactive_developer" tableName="developer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="developer">
+            <column name="id" type="uuid" remarks="id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(64)" remarks="Имя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(64)" remarks="Логин">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(64)" remarks="Фамилия">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(64)" remarks="Почта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp" remarks="Дата, время создания">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint
+                columnNames="id"
+                constraintName="id_developer_uniq"
+                tableName="developer"
+        />
+    </changeSet>
+
+    <changeSet author="kosyrevev" id="07092020_create_computer_language">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists schemaName="reactive_developer" tableName="computer_language"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="computer_language">
+            <column name="developer_id" type="uuid" remarks="Идентификатор из Developer"/>
+            <column name="id" type="uuid" remarks="id">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="language_type" type="varchar(24)" remarks="Название языка программирования"/>
+            <column name="getting_started" type="timestamp" remarks="Дата, время создания">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="developer_id"
+                                 baseTableName="computer_language"
+                                 constraintName="fk_developer_language_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="developer"/>
+    </changeSet>
+</databaseChangeLog>

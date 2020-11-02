@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="developers-dbo" />
+        <module name="developers-main" />
+        <module name="hub" />
+        <module name="developers-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="-parameters" />
+      <module name="developers-dbo" options="-parameters" />
+      <module name="developers-main" options="-parameters" />
+      <module name="developers-web" options="-parameters" />
+      <module name="hub" options="-parameters" />
+      <module name="hub-developer" options="-parameters" />
+    </option>
+  </component>
+</project>
