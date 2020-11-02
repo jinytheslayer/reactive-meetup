@@ -1,9 +1,7 @@
 package com.meetup.reactive.developersinfo.repository;
 
 import com.meetup.reactive.developersinfo.model.Developer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-import java.util.UUID;
-
-public interface DeveloperRepository extends JpaRepository<Developer, UUID> {
+public interface DeveloperRepository extends ReactiveCrudRepository<Developer, Long> {
 }

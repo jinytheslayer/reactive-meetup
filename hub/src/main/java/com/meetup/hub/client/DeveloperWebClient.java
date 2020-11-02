@@ -3,8 +3,7 @@ package com.meetup.hub.client;
 import com.meetup.hub.dto.DeveloperDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @Service
 public class DeveloperWebClient implements DevsClient {
@@ -15,9 +14,9 @@ public class DeveloperWebClient implements DevsClient {
     }
 
     @Override
-    public List<DeveloperDto> loadDevelopers() {
-        return baseClient.<DeveloperDto>getDevelopers()
-                .getBody();
+    public Flux<DeveloperDto> loadDevelopers() {
+        return baseClient.getDevelopers()
+                .flatMapMany(res -> res.bodyToFlux(DeveloperDto.class));
     }
 
 }

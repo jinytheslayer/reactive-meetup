@@ -1,9 +1,8 @@
 package com.meetup.hub.client;
 
 import com.meetup.hub.dto.DeveloperDto;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public interface DevsClient<T extends DeveloperDto> {
-    List<T> loadDevelopers();
+    Flux<T> loadDevelopers();
 }

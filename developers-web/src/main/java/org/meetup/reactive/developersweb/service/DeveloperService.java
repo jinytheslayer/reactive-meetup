@@ -4,12 +4,12 @@ package org.meetup.reactive.developersweb.service;
 import lombok.RequiredArgsConstructor;
 import org.meetup.reactive.developersweb.dto.DeveloperDto;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.meetup.reactive.developersweb.support.Names.getRandomName;
 import static org.meetup.reactive.developersweb.support.SecondNames.getRandomSecondName;
@@ -18,13 +18,9 @@ import static org.meetup.reactive.developersweb.support.SecondNames.getRandomSec
 @Service
 @RequiredArgsConstructor
 public class DeveloperService {
-    public List<DeveloperDto> loadDeveloper() {
-        try {
-            Thread.sleep(randInt(5,5000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return IntStream.range(0, 10).mapToObj(obj ->
+    public Flux<DeveloperDto> loadDeveloper() {
+
+        final Stream<DeveloperDto> developersStream = IntStream.range(0, 10).mapToObj(obj ->
                 DeveloperDto.builder()
                         .email("test-web-dev@mail.ru")
                         .firstName(getRandomName())
@@ -32,8 +28,8 @@ public class DeveloperService {
                         .login("login")
                         .lastName(getRandomSecondName())
                         .build()
-        )
-                .collect(Collectors.toList());
+        );
+        return Flux.fromStream(developersStream);
     }
 
     public static int randInt(int min, int max) {

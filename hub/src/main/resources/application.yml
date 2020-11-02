@@ -13,4 +13,4 @@ hub:
 server:
   tomcat:
     threads:
-      max: 100
+      max: 4

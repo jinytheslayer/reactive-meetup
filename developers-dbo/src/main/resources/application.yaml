@@ -1,35 +1,32 @@
 spring:
   application:
     name: springcloud
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/reactive_developer
-    username: reactive_developer
-    password: reactive_developer
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      idle-timeout: 10000
-    platform: postgresql
-  jpa:
-    properties:
-      show-sql: false
-      org.hibernate.envers.store_data_at_delete: true
-      org.hibernate.envers.revision_on_collection_change: true
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
-        show_sql: false
-        use_sql_comments: true
-        format_sql: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-      proc:
-        param_null_passing: true
-    hibernate:
-      ddl-auto: validate
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/r2dbc_developer
+    username: r2dbc_developer
+    password: r2dbc_developer
+
+
+#  jpa:
+#    properties:
+#      show-sql: false
+#      org.hibernate.envers.store_data_at_delete: true
+#      org.hibernate.envers.revision_on_collection_change: true
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+#        show_sql: false
+#        use_sql_comments: true
+#        format_sql: true
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+#      proc:
+#        param_null_passing: true
+#    hibernate:
+#      ddl-auto: validate
 
 server:
   port: 8084
   tomcat:
     threads:
-      max: 100
+      max: 4
